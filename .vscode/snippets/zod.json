@@ -1,0 +1,104 @@
+{
+  "Zod String Schema": {
+    "prefix": "zstring",
+    "body": [
+      "z.string()$0"
+    ],
+    "description": "Zod string validation"
+  },
+  "Zod String with Validation": {
+    "prefix": "zstringval",
+    "body": [
+      "z.string().min(${1:1}, '${2:Message}').max(${3:100}, '${4:Message}')$0"
+    ],
+    "description": "Zod string with min/max validation"
+  },
+  "Zod Email": {
+    "prefix": "zemail",
+    "body": [
+      "z.string().email('${1:Invalid email address}')$0"
+    ],
+    "description": "Zod email validation"
+  },
+  "Zod Number": {
+    "prefix": "znumber",
+    "body": [
+      "z.number()$0"
+    ],
+    "description": "Zod number validation"
+  },
+  "Zod Boolean": {
+    "prefix": "zboolean",
+    "body": [
+      "z.boolean()$0"
+    ],
+    "description": "Zod boolean validation"
+  },
+  "Zod Date": {
+    "prefix": "zdate",
+    "body": [
+      "z.date()$0"
+    ],
+    "description": "Zod date validation"
+  },
+  "Zod Array": {
+    "prefix": "zarray",
+    "body": [
+      "z.array(${1:z.string()})$0"
+    ],
+    "description": "Zod array validation"
+  },
+  "Zod Object": {
+    "prefix": "zobject",
+    "body": [
+      "z.object({",
+      "  $0",
+      "})"
+    ],
+    "description": "Zod object validation"
+  },
+  "Zod Optional": {
+    "prefix": "zoptional",
+    "body": [
+      "z.optional(${1:z.string()})$0"
+    ],
+    "description": "Zod optional validation"
+  },
+  "Zod Nullable": {
+    "prefix": "znullable",
+    "body": [
+      "z.nullable(${1:z.string()})$0"
+    ],
+    "description": "Zod nullable validation"
+  },
+  "Zod Union": {
+    "prefix": "zunion",
+    "body": [
+      "z.union([${1:z.string()}, ${2:z.number()}])$0"
+    ],
+    "description": "Zod union validation"
+  },
+  "Zod Enum": {
+    "prefix": "zenum",
+    "body": [
+      "z.enum(['${1:option1}', '${2:option2}'])$0"
+    ],
+    "description": "Zod enum validation"
+  },
+  "Zod Refinement": {
+    "prefix": "zrefine",
+    "body": [
+      ".refine((val) => ${1:condition}, {",
+      "  message: '${2:Error message}',",
+      "})$0"
+    ],
+    "description": "Zod custom refinement"
+  },
+  "Zod Transform": {
+    "prefix": "ztransform",
+    "body": [
+      ".transform((val) => ${1:transformation})$0"
+    ],
+    "description": "Zod transform validation"
+  }
+}

@@ -1,0 +1,127 @@
+name: ⚡ Performance Issue
+description: Report a performance problem
+title: "[Performance]: "
+labels: ["performance", "bug"]
+assignees: ["antowirantoIO"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a performance issue! ⚡
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+
+  - type: textarea
+    id: performance-issue
+    attributes:
+      label: Describe the performance issue
+      description: What specific performance problem are you experiencing?
+      placeholder: The page takes too long to load when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-performance
+    attributes:
+      label: Expected Performance
+      description: What performance did you expect?
+      placeholder: I expected the page to load in under 2 seconds
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-performance
+    attributes:
+      label: Actual Performance
+      description: What is the actual performance you're experiencing?
+      placeholder: The page takes 10+ seconds to load
+    validations:
+      required: true
+
+  - type: dropdown
+    id: performance-type
+    attributes:
+      label: Performance Issue Type
+      description: What type of performance issue is this?
+      options:
+        - Page Load Time
+        - API Response Time
+        - Memory Usage
+        - CPU Usage
+        - Bundle Size
+        - Database Query Performance
+        - UI Responsiveness
+        - Network Requests
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: measurements
+    attributes:
+      label: Performance Measurements
+      description: If you have specific metrics, please share them
+      placeholder: |
+        - Load time: 10.5 seconds
+        - Memory usage: 500MB
+        - Bundle size: 5MB
+        - Lighthouse score: 45/100
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this performance issue?
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Observe the slow performance
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please provide information about your environment
+      placeholder: |
+        - OS: [e.g. macOS 12.0, Windows 11]
+        - Browser: [e.g. Chrome 91.0, Safari 14.1]
+        - Device: [e.g. iPhone 12, Desktop, Low-end mobile]
+        - Network: [e.g. 4G, WiFi, Slow 3G]
+        - Hardware: [e.g. 8GB RAM, Intel i5, M1 Mac]
+    validations:
+      required: true
+
+  - type: textarea
+    id: profiling-data
+    attributes:
+      label: Profiling Data
+      description: If you have profiling data (DevTools, Lighthouse reports, etc.), please attach or paste it here
+      render: json
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the performance issue here
+      placeholder: Any additional information that might help us understand the issue
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/antowirantoIO/nextjs-enterprise-crm/blob/main/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

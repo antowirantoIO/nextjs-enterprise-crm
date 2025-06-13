@@ -1,0 +1,137 @@
+{
+  "TypeScript Interface": {
+    "prefix": "tsi",
+    "body": [
+      "interface ${1:InterfaceName} {",
+      "  $0",
+      "}"
+    ],
+    "description": "Create a TypeScript interface"
+  },
+  "TypeScript Type": {
+    "prefix": "tst",
+    "body": [
+      "type ${1:TypeName} = {",
+      "  $0",
+      "};"
+    ],
+    "description": "Create a TypeScript type"
+  },
+  "TypeScript Enum": {
+    "prefix": "tse",
+    "body": [
+      "enum ${1:EnumName} {",
+      "  $0",
+      "}"
+    ],
+    "description": "Create a TypeScript enum"
+  },
+  "API Route Handler": {
+    "prefix": "apiroute",
+    "body": [
+      "import { NextRequest, NextResponse } from 'next/server';",
+      "",
+      "export async function GET(request: NextRequest) {",
+      "  try {",
+      "    $1",
+      "    return NextResponse.json({ success: true });",
+      "  } catch (error) {",
+      "    console.error('${2:Operation} error:', error);",
+      "    return NextResponse.json(",
+      "      { error: 'Internal server error' },",
+      "      { status: 500 }",
+      "    );",
+      "  }",
+      "}",
+      "",
+      "export async function POST(request: NextRequest) {",
+      "  try {",
+      "    const body = await request.json();",
+      "    $3",
+      "    return NextResponse.json({ success: true });",
+      "  } catch (error) {",
+      "    console.error('${2:Operation} error:', error);",
+      "    return NextResponse.json(",
+      "      { error: 'Internal server error' },",
+      "      { status: 500 }",
+      "    );",
+      "  }",
+      "}"
+    ],
+    "description": "Create Next.js 13+ API route handlers"
+  },
+  "Zod Schema": {
+    "prefix": "zod",
+    "body": [
+      "import { z } from 'zod';",
+      "",
+      "export const ${1:schemaName}Schema = z.object({",
+      "  $0",
+      "});",
+      "",
+      "export type ${1/(.*)/${1:/capitalize}/} = z.infer<typeof ${1:schemaName}Schema>;"
+    ],
+    "description": "Create a Zod validation schema"
+  },
+  "Zustand Store": {
+    "prefix": "zustand",
+    "body": [
+      "import { create } from 'zustand';",
+      "import { devtools, persist } from 'zustand/middleware';",
+      "",
+      "interface ${1:StoreName}State {",
+      "  $2",
+      "}",
+      "",
+      "interface ${1:StoreName}Actions {",
+      "  $3",
+      "}",
+      "",
+      "export const use${1:StoreName}Store = create<${1:StoreName}State & ${1:StoreName}Actions>()(",
+      "  devtools(",
+      "    persist(",
+      "      (set, get) => ({",
+      "        $4",
+      "      }),",
+      "      {",
+      "        name: '${1:StoreName/(.*)/${1:/downcase}/}-storage',",
+      "      }",
+      "    ),",
+      "    {",
+      "      name: '${1:StoreName}Store',",
+      "    }",
+      "  )",
+      ");"
+    ],
+    "description": "Create a Zustand store with devtools and persist"
+  },
+  "Custom Hook": {
+    "prefix": "customhook",
+    "body": [
+      "import { useState, useEffect } from 'react';",
+      "",
+      "interface Use${1:HookName}Options {",
+      "  $2",
+      "}",
+      "",
+      "interface Use${1:HookName}Return {",
+      "  $3",
+      "}",
+      "",
+      "export function use${1:HookName}(options: Use${1:HookName}Options = {}): Use${1:HookName}Return {",
+      "  const [${4:state}, set${4/(.*)/${4:/capitalize}/}] = useState($5);",
+      "",
+      "  useEffect(() => {",
+      "    $6",
+      "  }, [$7]);",
+      "",
+      "  return {",
+      "    ${4:state},",
+      "    set${4/(.*)/${4:/capitalize}/},",
+      "    $0",
+      "  };",
+      "}"
+    ],
+    "description": "Create a custom hook with TypeScript"
+  }
+}

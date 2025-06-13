@@ -1,0 +1,143 @@
+{
+  "React Functional Component": {
+    "prefix": "rfc",
+    "body": [
+      "import React from 'react';",
+      "",
+      "interface ${1:ComponentName}Props {",
+      "  $2",
+      "}",
+      "",
+      "export default function ${1:ComponentName}({ $3 }: ${1:ComponentName}Props) {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Create a React functional component with TypeScript"
+  },
+  "React Functional Component with Export": {
+    "prefix": "rfce",
+    "body": [
+      "import React from 'react';",
+      "",
+      "interface ${1:ComponentName}Props {",
+      "  $2",
+      "}",
+      "",
+      "function ${1:ComponentName}({ $3 }: ${1:ComponentName}Props) {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "}",
+      "",
+      "export default ${1:ComponentName};"
+    ],
+    "description": "Create a React functional component with separate export"
+  },
+  "React Hook": {
+    "prefix": "rhook",
+    "body": [
+      "import { useState, useEffect } from 'react';",
+      "",
+      "export function use${1:HookName}($2) {",
+      "  const [${3:state}, set${3/(.*)/${3:/capitalize}/}] = useState($4);",
+      "",
+      "  useEffect(() => {",
+      "    $5",
+      "  }, [$6]);",
+      "",
+      "  return {",
+      "    ${3:state},",
+      "    set${3/(.*)/${3:/capitalize}/},",
+      "    $0",
+      "  };",
+      "}"
+    ],
+    "description": "Create a custom React hook"
+  },
+  "React Server Component": {
+    "prefix": "rsc",
+    "body": [
+      "import React from 'react';",
+      "",
+      "interface ${1:ComponentName}Props {",
+      "  $2",
+      "}",
+      "",
+      "export default async function ${1:ComponentName}({ $3 }: ${1:ComponentName}Props) {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Create a React Server Component"
+  },
+  "React Client Component": {
+    "prefix": "rcc",
+    "body": [
+      "'use client';",
+      "",
+      "import React from 'react';",
+      "",
+      "interface ${1:ComponentName}Props {",
+      "  $2",
+      "}",
+      "",
+      "export default function ${1:ComponentName}({ $3 }: ${1:ComponentName}Props) {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Create a React Client Component"
+  },
+  "React Context": {
+    "prefix": "rcontext",
+    "body": [
+      "'use client';",
+      "",
+      "import React, { createContext, useContext, ReactNode } from 'react';",
+      "",
+      "interface ${1:ContextName}ContextType {",
+      "  $2",
+      "}",
+      "",
+      "const ${1:ContextName}Context = createContext<${1:ContextName}ContextType | undefined>(undefined);",
+      "",
+      "interface ${1:ContextName}ProviderProps {",
+      "  children: ReactNode;",
+      "  $3",
+      "}",
+      "",
+      "export function ${1:ContextName}Provider({ children, $4 }: ${1:ContextName}ProviderProps) {",
+      "  const value = {",
+      "    $5",
+      "  };",
+      "",
+      "  return (",
+      "    <${1:ContextName}Context.Provider value={value}>",
+      "      {children}",
+      "    </${1:ContextName}Context.Provider>",
+      "  );",
+      "}",
+      "",
+      "export function use${1:ContextName}() {",
+      "  const context = useContext(${1:ContextName}Context);",
+      "  if (context === undefined) {",
+      "    throw new Error('use${1:ContextName} must be used within a ${1:ContextName}Provider');",
+      "  }",
+      "  return context;",
+      "}"
+    ],
+    "description": "Create a React Context with Provider and Hook"
+  }
+}

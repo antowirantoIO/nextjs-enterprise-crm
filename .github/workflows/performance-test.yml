@@ -1,0 +1,127 @@
+name: ⚡ Performance Testing
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 4 * * *' # Daily at 4 AM
+
+jobs:
+  load-test:
+    name: ⚡ Load Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: 📦 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🏗️ Build application
+        run: pnpm build
+
+      - name: 🚀 Start application
+        run: pnpm start &
+        env:
+          PORT: 3000
+
+      - name: ⏳ Wait for application
+        run: sleep 15
+
+      - name: ⚡ Install Artillery
+        run: npm install -g artillery@latest
+
+      - name: ⚡ Run load tests
+        run: |
+          echo "
+          config:
+            target: 'http://localhost:3000'
+            phases:
+              - duration: 60
+                arrivalRate: 5
+                name: 'Warm up'
+              - duration: 120
+                arrivalRate: 10
+                name: 'Sustained load'
+              - duration: 60
+                arrivalRate: 20
+                name: 'Peak load'
+          scenarios:
+            - name: 'Homepage load'
+              weight: 50
+              flow:
+                - get:
+                    url: '/'
+                - think: 1
+            - name: 'API health check'
+              weight: 30
+              flow:
+                - get:
+                    url: '/api/health'
+                - think: 1
+            - name: 'Auth page'
+              weight: 20
+              flow:
+                - get:
+                    url: '/auth/signin'
+                - think: 2
+          " > artillery-config.yml
+          
+          artillery run artillery-config.yml --output performance-report.json
+
+      - name: 📊 Generate performance report
+        run: |
+          artillery report performance-report.json --output performance-report.html
+
+      - name: 📊 Upload performance results
+        uses: actions/upload-artifact@v3
+        with:
+          name: performance-results
+          path: |
+            performance-report.json
+            performance-report.html
+          retention-days: 30
+
+  bundle-analysis:
+    name: 📦 Bundle Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: 📦 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 📊 Analyze bundle
+        run: pnpm analyze
+        env:
+          ANALYZE: true
+
+      - name: 📊 Upload bundle analysis
+        uses: actions/upload-artifact@v3
+        with:
+          name: bundle-analysis
+          path: .next/analyze
+          retention-days: 30
