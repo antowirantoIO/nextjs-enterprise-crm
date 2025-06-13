@@ -86,7 +86,7 @@ jobs:
           artillery report performance-report.json --output performance-report.html
 
       - name: 📊 Upload performance results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: performance-results
           path: |
@@ -120,7 +120,7 @@ jobs:
           ANALYZE: true
 
       - name: 📊 Upload bundle analysis
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bundle-analysis
           path: .next/analyze
