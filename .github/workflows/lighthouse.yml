@@ -54,7 +54,7 @@ jobs:
           temporaryPublicStorage: true
 
       - name: 📊 Upload Lighthouse results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lighthouse-results
           path: .lighthouseci
