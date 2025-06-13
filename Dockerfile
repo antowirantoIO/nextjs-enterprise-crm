@@ -1,5 +1,5 @@
 # Build stage
-FROM node:18-alpine AS builder
+FROM node:24-alpine AS builder
 
 # Install dependencies only when needed
 RUN apk add --no-cache libc6-compat
@@ -25,7 +25,7 @@ ENV NODE_ENV production
 RUN pnpm build
 
 # Production stage
-FROM node:18-alpine AS runner
+FROM node:24-alpine AS runner
 
 WORKDIR /app
 
